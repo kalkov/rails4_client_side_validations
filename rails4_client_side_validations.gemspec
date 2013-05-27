@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Vassil Kalkov"]
   s.email       = ["vassilkalkov@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Client Side Validations}
-  s.description = %q{Client Side Validations}
+  s.summary     = %q{Client Side Validations for Rails 4}
+  s.description = %q{Client Side Validations for Rails 4}
 
   s.files         = `git ls-files -- {lib/*,vendor/*,*.gemspec}`.split("\n")
   s.require_paths = ["lib"]
