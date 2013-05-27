@@ -59,7 +59,7 @@ def perform_git_commit
 end
 
 def regenerate_javascript
-  ClientSideValidations::Processor.run
+  Rails4ClientSideValidations::Processor.run
   puts 'Regenerated JavaScript'
 end
 

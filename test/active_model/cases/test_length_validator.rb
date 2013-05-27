@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::LengthValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::LengthValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_length_client_side_hash
     expected_hash = {

@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::ValidationsTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::ValidationsTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   class Person
     include ::ActiveModel::Validations
@@ -408,7 +408,7 @@ class ActiveModel::ValidationsTest < ClientSideValidations::ActiveModelTestBase
   end
 
   def test_validations_to_client_side_hash_with_validator_is_disabled
-    ::ClientSideValidations::Config.stubs(:disabled_validators).returns([:presence])
+    ::Rails4ClientSideValidations::Config.stubs(:disabled_validators).returns([:presence])
     person = new_person do |p|
       p.validates_presence_of :first_name
     end

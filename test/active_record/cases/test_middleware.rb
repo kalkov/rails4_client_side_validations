@@ -3,7 +3,7 @@
 require 'middleware/cases/helper'
 require 'active_record/cases/helper'
 
-class ClientSideValidationsActiveRecordMiddlewareTest < Test::Unit::TestCase
+class Rails4ClientSideValidationsActiveRecordMiddlewareTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def teardown
@@ -25,7 +25,7 @@ class ClientSideValidationsActiveRecordMiddlewareTest < Test::Unit::TestCase
 
   def app
     app = Proc.new { |env| [200, {}, ['success']] }
-    ClientSideValidations::Middleware::Validators.new(app)
+    Rails4ClientSideValidations::Middleware::Validators.new(app)
   end
 
   def test_uniqueness_when_resource_exists

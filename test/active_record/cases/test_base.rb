@@ -1,6 +1,6 @@
 require 'active_record/cases/helper'
 
-class ClientSideValidations::ActiveRecordTestBase < ActiveSupport::TestCase
+class Rails4ClientSideValidations::ActiveRecordTestBase < ActiveSupport::TestCase
   include ActiveRecord::Validations
 
   def setup

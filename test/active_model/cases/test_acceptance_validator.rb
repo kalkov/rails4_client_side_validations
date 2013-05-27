@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::AcceptanceValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::AcceptanceValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_acceptance_client_side_hash
     expected_hash = { :message => "must be accepted", :accept => "1" }

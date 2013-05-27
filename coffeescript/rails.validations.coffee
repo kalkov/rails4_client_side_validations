@@ -1,30 +1,30 @@
-# Rails 3 Client Side Validations - v<%= ClientSideValidations::VERSION %>
-# https://github.com/bcardarella/client_side_validations
+# Rails 3 Client Side Validations - v<%= Rails4ClientSideValidations::VERSION %>
+# https://github.com/bcardarella/rails4_client_side_validations
 #
 # Copyright (c) <%= DateTime.now.year %> Brian Cardarella
 # Licensed under the MIT license
 # http://www.opensource.org/licenses/mit-license.php
 
 $ = jQuery
-$.fn.disableClientSideValidations = ->
-  ClientSideValidations.disable(@)
+$.fn.disableRails4ClientSideValidations = ->
+  Rails4ClientSideValidations.disable(@)
   @
 
-$.fn.enableClientSideValidations = ->
-  @filter(ClientSideValidations.selectors.forms).each ->
-    ClientSideValidations.enablers.form(@)
-  @filter(ClientSideValidations.selectors.inputs).each ->
-    ClientSideValidations.enablers.input(@)
+$.fn.enableRails4ClientSideValidations = ->
+  @filter(Rails4ClientSideValidations.selectors.forms).each ->
+    Rails4ClientSideValidations.enablers.form(@)
+  @filter(Rails4ClientSideValidations.selectors.inputs).each ->
+    Rails4ClientSideValidations.enablers.input(@)
   @
 
-$.fn.resetClientSideValidations = ->
-  @filter(ClientSideValidations.selectors.forms).each ->
-    ClientSideValidations.reset(@)
+$.fn.resetRails4ClientSideValidations = ->
+  @filter(Rails4ClientSideValidations.selectors.forms).each ->
+    Rails4ClientSideValidations.reset(@)
   @
 
 $.fn.validate = ->
-  @filter(ClientSideValidations.selectors.forms).each ->
-    $(@).enableClientSideValidations()
+  @filter(Rails4ClientSideValidations.selectors.forms).each ->
+    $(@).enableRails4ClientSideValidations()
   @
 
 $.fn.isValid = (validators) ->
@@ -39,31 +39,31 @@ validatorsFor = (name, validators) ->
   validators[name] || {}
 
 validateForm = (form, validators) ->
-  form.trigger('form:validate:before.ClientSideValidations')
+  form.trigger('form:validate:before.Rails4ClientSideValidations')
 
   valid = true
-  form.find(ClientSideValidations.selectors.validate_inputs).each ->
+  form.find(Rails4ClientSideValidations.selectors.validate_inputs).each ->
     valid = false unless $(@).isValid(validators)
     # we don't want the loop to break out by mistake
     true
 
-  if valid then form.trigger('form:validate:pass.ClientSideValidations') else form.trigger('form:validate:fail.ClientSideValidations')
+  if valid then form.trigger('form:validate:pass.Rails4ClientSideValidations') else form.trigger('form:validate:fail.Rails4ClientSideValidations')
 
-  form.trigger('form:validate:after.ClientSideValidations')
+  form.trigger('form:validate:after.Rails4ClientSideValidations')
   valid
 
 validateElement = (element, validators) ->
-  element.trigger('element:validate:before.ClientSideValidations')
+  element.trigger('element:validate:before.Rails4ClientSideValidations')
 
   passElement = ->
-    element.trigger('element:validate:pass.ClientSideValidations').data('valid', null)
+    element.trigger('element:validate:pass.Rails4ClientSideValidations').data('valid', null)
 
   failElement = (message) ->
-    element.trigger('element:validate:fail.ClientSideValidations', message).data('valid', false)
+    element.trigger('element:validate:fail.Rails4ClientSideValidations', message).data('valid', false)
     false
 
   afterValidate = ->
-    element.trigger('element:validate:after.ClientSideValidations').data('valid') != false
+    element.trigger('element:validate:after.Rails4ClientSideValidations').data('valid') != false
 
   executeValidators = (context) ->
     valid = true
@@ -91,69 +91,69 @@ validateElement = (element, validators) ->
 
   element.data('changed', false)
 
-  local  = ClientSideValidations.validators.local
-  remote = ClientSideValidations.validators.remote
+  local  = Rails4ClientSideValidations.validators.local
+  remote = Rails4ClientSideValidations.validators.remote
 
   if executeValidators(local) and executeValidators(remote)
     passElement()
 
   afterValidate()
 
-if window.ClientSideValidations == undefined
-  window.ClientSideValidations = {}
+if window.Rails4ClientSideValidations == undefined
+  window.Rails4ClientSideValidations = {}
 
-if window.ClientSideValidations.forms == undefined
-  window.ClientSideValidations.forms = {}
+if window.Rails4ClientSideValidations.forms == undefined
+  window.Rails4ClientSideValidations.forms = {}
 
-window.ClientSideValidations.selectors =
+window.Rails4ClientSideValidations.selectors =
   inputs: ':input:not(button):not([type="submit"])[name]:visible:enabled'
   validate_inputs: ':input:enabled:visible[data-validate]'
   forms:  'form[data-validate]'
 
-window.ClientSideValidations.reset = (form) ->
+window.Rails4ClientSideValidations.reset = (form) ->
   $form = $(form)
-  ClientSideValidations.disable(form)
-  for key of form.ClientSideValidations.settings.validators
-    form.ClientSideValidations.removeError($form.find("[name='#{key}']"))
+  Rails4ClientSideValidations.disable(form)
+  for key of form.Rails4ClientSideValidations.settings.validators
+    form.Rails4ClientSideValidations.removeError($form.find("[name='#{key}']"))
 
-  ClientSideValidations.enablers.form(form)
+  Rails4ClientSideValidations.enablers.form(form)
 
-window.ClientSideValidations.disable = (target) ->
+window.Rails4ClientSideValidations.disable = (target) ->
   $target = $(target)
-  $target.off('.ClientSideValidations')
+  $target.off('.Rails4ClientSideValidations')
   if $target.is('form')
-    ClientSideValidations.disable($target.find(':input'))
+    Rails4ClientSideValidations.disable($target.find(':input'))
   else
     $target.removeData('valid')
     $target.removeData('changed')
     $target.filter(':input').each ->
       $(@).removeAttr('data-validate')
 
-window.ClientSideValidations.enablers =
+window.Rails4ClientSideValidations.enablers =
   form: (form) ->
     $form = $(form)
-    form.ClientSideValidations =
-      settings: window.ClientSideValidations.forms[$form.attr('id')]
+    form.Rails4ClientSideValidations =
+      settings: window.Rails4ClientSideValidations.forms[$form.attr('id')]
       addError: (element, message) ->
-        ClientSideValidations.formBuilders[form.ClientSideValidations.settings.type].add(element, form.ClientSideValidations.settings, message)
+        Rails4ClientSideValidations.formBuilders[form.Rails4ClientSideValidations.settings.type].add(element, form.Rails4ClientSideValidations.settings, message)
       removeError: (element) ->
-        ClientSideValidations.formBuilders[form.ClientSideValidations.settings.type].remove(element, form.ClientSideValidations.settings)
+        Rails4ClientSideValidations.formBuilders[form.Rails4ClientSideValidations.settings.type].remove(element, form.Rails4ClientSideValidations.settings)
 
     # Set up the events for the form
     $form.on(event, binding) for event, binding of {
-      'submit.ClientSideValidations'              : (eventData) ->
-        unless $form.isValid(form.ClientSideValidations.settings.validators)
+      'submit.Rails4ClientSideValidations'              : (eventData) ->
+        unless $form.isValid(form.Rails4ClientSideValidations.settings.validators)
           eventData.preventDefault()
           eventData.stopImmediatePropagation()
-      'ajax:beforeSend.ClientSideValidations'     : (eventData) -> $form.isValid(form.ClientSideValidations.settings.validators) if eventData.target == @
-      'form:validate:after.ClientSideValidations' : (eventData) -> ClientSideValidations.callbacks.form.after( $form, eventData)
-      'form:validate:before.ClientSideValidations': (eventData) -> ClientSideValidations.callbacks.form.before($form, eventData)
-      'form:validate:fail.ClientSideValidations'  : (eventData) -> ClientSideValidations.callbacks.form.fail(  $form, eventData)
-      'form:validate:pass.ClientSideValidations'  : (eventData) -> ClientSideValidations.callbacks.form.pass(  $form, eventData)
+      'ajax:beforeSend.Rails4ClientSideValidations'     : (eventData) -> $form.isValid(form.Rails4ClientSideValidations.settings.validators) if eventData.target == @
+      'form:validate:after.Rails4ClientSideValidations' : (eventData) -> Rails4ClientSideValidations.callbacks.form.after( $form, eventData)
+      'form:validate:before.Rails4ClientSideValidations': (eventData) -> Rails4ClientSideValidations.callbacks.form.before($form, eventData)
+      'form:validate:fail.Rails4ClientSideValidations'  : (eventData) -> Rails4ClientSideValidations.callbacks.form.fail(  $form, eventData)
+      'form:validate:pass.Rails4ClientSideValidations'  : (eventData) -> Rails4ClientSideValidations.callbacks.form.pass(  $form, eventData)
     }
 
-    $form.find(ClientSideValidations.selectors.inputs).each ->
-      ClientSideValidations.enablers.input(@)
+    $form.find(Rails4ClientSideValidations.selectors.inputs).each ->
+      Rails4ClientSideValidations.enablers.input(@)
 
   input: (input) ->
     $input = $(input)
@@ -164,28 +164,28 @@ window.ClientSideValidations.enablers =
       .each ->
         $(@).attr('data-validate', true)
       .on(event, binding) for event, binding of {
-        'focusout.ClientSideValidations': ->
-          $(@).isValid(form.ClientSideValidations.settings.validators)
-        'change.ClientSideValidations':   -> $(@).data('changed', true)
+        'focusout.Rails4ClientSideValidations': ->
+          $(@).isValid(form.Rails4ClientSideValidations.settings.validators)
+        'change.Rails4ClientSideValidations':   -> $(@).data('changed', true)
         # Callbacks
-        'element:validate:after.ClientSideValidations':  (eventData) -> ClientSideValidations.callbacks.element.after($(@),  eventData)
-        'element:validate:before.ClientSideValidations': (eventData) -> ClientSideValidations.callbacks.element.before($(@), eventData)
-        'element:validate:fail.ClientSideValidations':   (eventData, message) ->
+        'element:validate:after.Rails4ClientSideValidations':  (eventData) -> Rails4ClientSideValidations.callbacks.element.after($(@),  eventData)
+        'element:validate:before.Rails4ClientSideValidations': (eventData) -> Rails4ClientSideValidations.callbacks.element.before($(@), eventData)
+        'element:validate:fail.Rails4ClientSideValidations':   (eventData, message) ->
           element = $(@)
-          ClientSideValidations.callbacks.element.fail(element, message, ->
-            form.ClientSideValidations.addError(element, message)
+          Rails4ClientSideValidations.callbacks.element.fail(element, message, ->
+            form.Rails4ClientSideValidations.addError(element, message)
           , eventData)
-        'element:validate:pass.ClientSideValidations':   (eventData) ->
+        'element:validate:pass.Rails4ClientSideValidations':   (eventData) ->
           element = $(@)
-          ClientSideValidations.callbacks.element.pass(element, ->
-            form.ClientSideValidations.removeError(element)
+          Rails4ClientSideValidations.callbacks.element.pass(element, ->
+            form.Rails4ClientSideValidations.removeError(element)
           , eventData)
       }
 
     # This is 'change' instead of 'click' to avoid problems with jQuery versions < 1.9
     # Look this http://jquery.com/upgrade-guide/1.9/#checkbox-radio-state-in-a-trigger-ed-click-event for more details
-    $input.filter(':checkbox').on('change.ClientSideValidations', ->
-       $(@).isValid(form.ClientSideValidations.settings.validators)
+    $input.filter(':checkbox').on('change.Rails4ClientSideValidations', ->
+       $(@).isValid(form.Rails4ClientSideValidations.settings.validators)
     )
 
     # Inputs for confirmations
@@ -194,12 +194,12 @@ window.ClientSideValidations.enablers =
       element = $form.find("##{@id.match(/(.+)_confirmation/)[1]}:input")
       if element[0]
         $("##{confirmationElement.attr('id')}").on(event, binding) for event, binding of {
-          'focusout.ClientSideValidations': -> element.data('changed', true).isValid(form.ClientSideValidations.settings.validators)
-          'keyup.ClientSideValidations'   : -> element.data('changed', true).isValid(form.ClientSideValidations.settings.validators)
+          'focusout.Rails4ClientSideValidations': -> element.data('changed', true).isValid(form.Rails4ClientSideValidations.settings.validators)
+          'keyup.Rails4ClientSideValidations'   : -> element.data('changed', true).isValid(form.Rails4ClientSideValidations.settings.validators)
         }
 
-window.ClientSideValidations.validators =
-    all: -> jQuery.extend({}, ClientSideValidations.validators.local, ClientSideValidations.validators.remote)
+window.Rails4ClientSideValidations.validators =
+    all: -> jQuery.extend({}, Rails4ClientSideValidations.validators.local, Rails4ClientSideValidations.validators.remote)
     local:
       absence: (element, options) ->
         options.message unless /^\s*$/.test(element.val() || '')
@@ -227,7 +227,7 @@ window.ClientSideValidations.validators =
 
       numericality: (element, options) ->
         val = jQuery.trim(element.val())
-        unless ClientSideValidations.patterns.numericality.test(val)
+        unless Rails4ClientSideValidations.patterns.numericality.test(val)
           return if options.allow_blank == true and @presence(element, {message: options.messages.numericality})
           return options.messages.numericality
 
@@ -251,7 +251,7 @@ window.ClientSideValidations.validators =
           else
             return
 
-          val = val.replace(new RegExp("\\#{ClientSideValidations.number_format.delimiter}",'g'),"").replace(new RegExp("\\#{ClientSideValidations.number_format.separator}",'g'),".")
+          val = val.replace(new RegExp("\\#{Rails4ClientSideValidations.number_format.delimiter}",'g'),"").replace(new RegExp("\\#{Rails4ClientSideValidations.number_format.separator}",'g'),".")
           fn = new Function("return #{val} #{operator} #{check_value}")
           return options.messages[check] unless fn()
 
@@ -351,7 +351,7 @@ window.ClientSideValidations.validators =
 
     remote:
       uniqueness: (element, options) ->
-        message = ClientSideValidations.validators.local.presence(element, options)
+        message = Rails4ClientSideValidations.validators.local.presence(element, options)
         if message
           return if options.allow_blank == true
           return message
@@ -372,8 +372,8 @@ window.ClientSideValidations.validators =
             if scoped_element[0] and scoped_element.val() != scope_value
               data.scope[key] = scoped_element.val()
               scoped_element.unbind("change.#{element.id}").bind "change.#{element.id}", ->
-                element.trigger('change.ClientSideValidations')
-                element.trigger('focusout.ClientSideValidations')
+                element.trigger('change.Rails4ClientSideValidations')
+                element.trigger('focusout.Rails4ClientSideValidations')
             else
               data.scope[key] = scope_value
 
@@ -391,24 +391,24 @@ window.ClientSideValidations.validators =
         name = options['class'] + '[' + name.split('[')[1] if options['class']
         data[name] = element.val()
 
-        unless ClientSideValidations.remote_validators_prefix?
-          ClientSideValidations.remote_validators_prefix = ""
+        unless Rails4ClientSideValidations.remote_validators_prefix?
+          Rails4ClientSideValidations.remote_validators_prefix = ""
 
         if jQuery.ajax({
-          url: "#{ClientSideValidations.remote_validators_prefix}/validators/uniqueness",
+          url: "#{Rails4ClientSideValidations.remote_validators_prefix}/validators/uniqueness",
           data: data,
           async: false
           cache: false
         }).status == 200
           return options.message
 
-window.ClientSideValidations.disableValidators = () ->
-  return if window.ClientSideValidations.disabled_validators == undefined
-  for validator, func of window.ClientSideValidations.validators.remote
-    unless window.ClientSideValidations.disabled_validators.indexOf(validator) == -1
-      delete window.ClientSideValidations.validators.remote[validator]
+window.Rails4ClientSideValidations.disableValidators = () ->
+  return if window.Rails4ClientSideValidations.disabled_validators == undefined
+  for validator, func of window.Rails4ClientSideValidations.validators.remote
+    unless window.Rails4ClientSideValidations.disabled_validators.indexOf(validator) == -1
+      delete window.Rails4ClientSideValidations.validators.remote[validator]
 
-window.ClientSideValidations.formBuilders =
+window.Rails4ClientSideValidations.formBuilders =
     'ActionView::Helpers::FormBuilder':
       add: (element, settings, message) ->
         form = $(element[0].form)
@@ -441,10 +441,10 @@ window.ClientSideValidations.formBuilders =
           label.detach()
           labelErrorField.replaceWith(label)
 
-window.ClientSideValidations.patterns =
+window.Rails4ClientSideValidations.patterns =
     numericality: /^(-|\+)?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?$/
 
-window.ClientSideValidations.callbacks =
+window.Rails4ClientSideValidations.callbacks =
     element:
       after:  (element, eventData)                    ->
       before: (element, eventData)                    ->
@@ -461,6 +461,6 @@ window.ClientSideValidations.callbacks =
 # If new forms are dynamically introduced into the DOM the .validate() method
 # must be invoked on that form
 $(->
-  ClientSideValidations.disableValidators()
-  $(ClientSideValidations.selectors.forms).validate()
+  Rails4ClientSideValidations.disableValidators()
+  $(Rails4ClientSideValidations.selectors.forms).validate()
 )

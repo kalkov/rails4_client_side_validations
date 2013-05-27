@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "client_side_validations/version"
+require "rails4_client_side_validations/version"
 
 Gem::Specification.new do |s|
-  s.name        = "client_side_validations"
-  s.version     = ClientSideValidations::VERSION
+  s.name        = "rails4_client_side_validations"
+  s.version     = Rails4ClientSideValidations::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Brian Cardarella"]
   s.email       = ["bcardarella@gmail.com"]
-  s.homepage    = "https://github.com/bcardarella/client_side_validations"
+  s.homepage    = ""
   s.summary     = %q{Client Side Validations}
   s.description = %q{Client Side Validations}
 

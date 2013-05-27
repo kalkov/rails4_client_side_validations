@@ -2,7 +2,7 @@ require 'base_helper'
 require 'action_view'
 require 'action_view/template'
 require 'action_view/models'
-require 'client_side_validations/action_view'
+require 'rails4_client_side_validations/action_view'
 
 module ActionController
   class Base
@@ -11,8 +11,8 @@ module ActionController
 end
 
 module ActionViewTestSetup
-  include ::ClientSideValidations::ActionView::Helpers::FormHelper
-  include ::ClientSideValidations::ActionView::Helpers::FormTagHelper
+  include ::Rails4ClientSideValidations::ActionView::Helpers::FormHelper
+  include ::Rails4ClientSideValidations::ActionView::Helpers::FormTagHelper
 
   def form_for(*)
     @output_buffer = super
@@ -130,7 +130,7 @@ module ActionViewTestSetup
   def build_script_tag(html, id, validators)
     number_format = {:separator => '.', :delimiter => ','}
     patterns = {:numericality=>"/^(-|\\+)?(?:\\d+|\\d{1,3}(?:\\#{number_format[:delimiter]}\\d{3})+)(?:\\#{number_format[:separator]}\\d*)?$/"}
-    (html || '') + %Q{<script>//<![CDATA[\nif(window.ClientSideValidations===undefined)window.ClientSideValidations={};window.ClientSideValidations.disabled_validators=#{ClientSideValidations::Config.disabled_validators.to_json};window.ClientSideValidations.number_format=#{number_format.to_json};if(window.ClientSideValidations.patterns===undefined)window.ClientSideValidations.patterns = {};window.ClientSideValidations.patterns.numericality=#{patterns[:numericality]};if(window.ClientSideValidations.remote_validators_prefix===undefined)window.ClientSideValidations.remote_validators_prefix='';if(window.ClientSideValidations.forms===undefined)window.ClientSideValidations.forms={};window.ClientSideValidations.forms['#{id}'] = #{client_side_form_settings_helper.merge(:validators => validators).to_json};\n//]]></script>}
+    (html || '') + %Q{<script>//<![CDATA[\nif(window.Rails4ClientSideValidations===undefined)window.Rails4ClientSideValidations={};window.Rails4ClientSideValidations.disabled_validators=#{Rails4ClientSideValidations::Config.disabled_validators.to_json};window.Rails4ClientSideValidations.number_format=#{number_format.to_json};if(window.Rails4ClientSideValidations.patterns===undefined)window.Rails4ClientSideValidations.patterns = {};window.Rails4ClientSideValidations.patterns.numericality=#{patterns[:numericality]};if(window.Rails4ClientSideValidations.remote_validators_prefix===undefined)window.Rails4ClientSideValidations.remote_validators_prefix='';if(window.Rails4ClientSideValidations.forms===undefined)window.Rails4ClientSideValidations.forms={};window.Rails4ClientSideValidations.forms['#{id}'] = #{client_side_form_settings_helper.merge(:validators => validators).to_json};\n//]]></script>}
   end
 
   protected

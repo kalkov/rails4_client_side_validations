@@ -1,6 +1,6 @@
 require 'action_view/cases/helper'
 
-class ClientSideValidations::LegacyActionViewHelpersTest < ActionView::TestCase
+class Rails4ClientSideValidations::LegacyActionViewHelpersTest < ActionView::TestCase
   include ActionViewTestSetup
 
   def test_text_field

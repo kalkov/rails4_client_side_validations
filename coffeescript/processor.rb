@@ -1,10 +1,10 @@
 $:.unshift(File.expand_path('../../lib', __FILE__))
 
-require 'client_side_validations/version'
+require 'rails4_client_side_validations/version'
 require 'coffee_script'
 require 'erb'
 
-module ClientSideValidations
+module Rails4ClientSideValidations
   class Processor
     def self.run
       write_file

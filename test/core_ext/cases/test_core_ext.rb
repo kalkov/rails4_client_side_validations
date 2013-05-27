@@ -1,5 +1,5 @@
 require 'base_helper'
-require 'client_side_validations/core_ext'
+require 'rails4_client_side_validations/core_ext'
 
 class CoreExtTest < Test::Unit::TestCase
   def test_regexp_as_json

@@ -4,31 +4,31 @@
 
   $ = jQuery;
 
-  $.fn.disableClientSideValidations = function() {
-    ClientSideValidations.disable(this);
+  $.fn.disableRails4ClientSideValidations = function() {
+    Rails4Rails4ClientSideValidations.disable(this);
     return this;
   };
 
-  $.fn.enableClientSideValidations = function() {
-    this.filter(ClientSideValidations.selectors.forms).each(function() {
-      return ClientSideValidations.enablers.form(this);
+  $.fn.enableRails4ClientSideValidations = function() {
+    this.filter(Rails4ClientSideValidations.selectors.forms).each(function() {
+      return Rails4ClientSideValidations.enablers.form(this);
     });
-    this.filter(ClientSideValidations.selectors.inputs).each(function() {
-      return ClientSideValidations.enablers.input(this);
+    this.filter(Rails4ClientSideValidations.selectors.inputs).each(function() {
+      return Rails4ClientSideValidations.enablers.input(this);
     });
     return this;
   };
 
-  $.fn.resetClientSideValidations = function() {
-    this.filter(ClientSideValidations.selectors.forms).each(function() {
-      return ClientSideValidations.reset(this);
+  $.fn.resetRails4ClientSideValidations = function() {
+    this.filter(Rails4ClientSideValidations.selectors.forms).each(function() {
+      return Rails4ClientSideValidations.reset(this);
     });
     return this;
   };
 
   $.fn.validate = function() {
-    this.filter(ClientSideValidations.selectors.forms).each(function() {
-      return $(this).enableClientSideValidations();
+    this.filter(Rails4ClientSideValidations.selectors.forms).each(function() {
+      return $(this).enableRails4ClientSideValidations();
     });
     return this;
   };
@@ -50,35 +50,35 @@
 
   validateForm = function(form, validators) {
     var valid;
-    form.trigger('form:validate:before.ClientSideValidations');
+    form.trigger('form:validate:before.Rails4ClientSideValidations');
     valid = true;
-    form.find(ClientSideValidations.selectors.validate_inputs).each(function() {
+    form.find(Rails4ClientSideValidations.selectors.validate_inputs).each(function() {
       if (!$(this).isValid(validators)) {
         valid = false;
       }
       return true;
     });
     if (valid) {
-      form.trigger('form:validate:pass.ClientSideValidations');
+      form.trigger('form:validate:pass.Rails4ClientSideValidations');
     } else {
-      form.trigger('form:validate:fail.ClientSideValidations');
+      form.trigger('form:validate:fail.Rails4ClientSideValidations');
     }
-    form.trigger('form:validate:after.ClientSideValidations');
+    form.trigger('form:validate:after.Rails4ClientSideValidations');
     return valid;
   };
 
   validateElement = function(element, validators) {
     var afterValidate, destroyInputName, executeValidators, failElement, local, passElement, remote;
-    element.trigger('element:validate:before.ClientSideValidations');
+    element.trigger('element:validate:before.Rails4ClientSideValidations');
     passElement = function() {
-      return element.trigger('element:validate:pass.ClientSideValidations').data('valid', null);
+      return element.trigger('element:validate:pass.Rails4ClientSideValidations').data('valid', null);
     };
     failElement = function(message) {
-      element.trigger('element:validate:fail.ClientSideValidations', message).data('valid', false);
+      element.trigger('element:validate:fail.Rails4ClientSideValidations', message).data('valid', false);
       return false;
     };
     afterValidate = function() {
-      return element.trigger('element:validate:after.ClientSideValidations').data('valid') !== false;
+      return element.trigger('element:validate:after.Rails4ClientSideValidations').data('valid') !== false;
     };
     executeValidators = function(context) {
       var fn, kind, message, valid, validator, _i, _len, _ref;
@@ -110,44 +110,44 @@
       return afterValidate();
     }
     element.data('changed', false);
-    local = ClientSideValidations.validators.local;
-    remote = ClientSideValidations.validators.remote;
+    local = Rails4ClientSideValidations.validators.local;
+    remote = Rails4ClientSideValidations.validators.remote;
     if (executeValidators(local) && executeValidators(remote)) {
       passElement();
     }
     return afterValidate();
   };
 
-  if (window.ClientSideValidations === void 0) {
-    window.ClientSideValidations = {};
+  if (window.Rails4ClientSideValidations === void 0) {
+    window.Rails4ClientSideValidations = {};
   }
 
-  if (window.ClientSideValidations.forms === void 0) {
-    window.ClientSideValidations.forms = {};
+  if (window.Rails4ClientSideValidations.forms === void 0) {
+    window.Rails4ClientSideValidations.forms = {};
   }
 
-  window.ClientSideValidations.selectors = {
+  window.Rails4ClientSideValidations.selectors = {
     inputs: ':input:not(button):not([type="submit"])[name]:visible:enabled',
     validate_inputs: ':input:enabled:visible[data-validate]',
     forms: 'form[data-validate]'
   };
 
-  window.ClientSideValidations.reset = function(form) {
+  window.Rails4ClientSideValidations.reset = function(form) {
     var $form, key;
     $form = $(form);
-    ClientSideValidations.disable(form);
-    for (key in form.ClientSideValidations.settings.validators) {
-      form.ClientSideValidations.removeError($form.find("[name='" + key + "']"));
+    Rails4ClientSideValidations.disable(form);
+    for (key in form.Rails4ClientSideValidations.settings.validators) {
+      form.Rails4ClientSideValidations.removeError($form.find("[name='" + key + "']"));
     }
-    return ClientSideValidations.enablers.form(form);
+    return Rails4ClientSideValidations.enablers.form(form);
   };
 
-  window.ClientSideValidations.disable = function(target) {
+  window.Rails4ClientSideValidations.disable = function(target) {
     var $target;
     $target = $(target);
-    $target.off('.ClientSideValidations');
+    $target.off('.Rails4ClientSideValidations');
     if ($target.is('form')) {
-      return ClientSideValidations.disable($target.find(':input'));
+      return Rails4ClientSideValidations.disable($target.find(':input'));
     } else {
       $target.removeData('valid');
       $target.removeData('changed');
@@ -157,50 +157,50 @@
     }
   };
 
-  window.ClientSideValidations.enablers = {
+  window.Rails4ClientSideValidations.enablers = {
     form: function(form) {
       var $form, binding, event, _ref;
       $form = $(form);
-      form.ClientSideValidations = {
-        settings: window.ClientSideValidations.forms[$form.attr('id')],
+      form.Rails4ClientSideValidations = {
+        settings: window.Rails4ClientSideValidations.forms[$form.attr('id')],
         addError: function(element, message) {
-          return ClientSideValidations.formBuilders[form.ClientSideValidations.settings.type].add(element, form.ClientSideValidations.settings, message);
+          return Rails4ClientSideValidations.formBuilders[form.Rails4ClientSideValidations.settings.type].add(element, form.Rails4ClientSideValidations.settings, message);
         },
         removeError: function(element) {
-          return ClientSideValidations.formBuilders[form.ClientSideValidations.settings.type].remove(element, form.ClientSideValidations.settings);
+          return Rails4ClientSideValidations.formBuilders[form.Rails4ClientSideValidations.settings.type].remove(element, form.Rails4ClientSideValidations.settings);
         }
       };
       _ref = {
-        'submit.ClientSideValidations': function(eventData) {
-          if (!$form.isValid(form.ClientSideValidations.settings.validators)) {
+        'submit.Rails4ClientSideValidations': function(eventData) {
+          if (!$form.isValid(form.Rails4ClientSideValidations.settings.validators)) {
             eventData.preventDefault();
             return eventData.stopImmediatePropagation();
           }
         },
-        'ajax:beforeSend.ClientSideValidations': function(eventData) {
+        'ajax:beforeSend.Rails4ClientSideValidations': function(eventData) {
           if (eventData.target === this) {
-            return $form.isValid(form.ClientSideValidations.settings.validators);
+            return $form.isValid(form.Rails4ClientSideValidations.settings.validators);
           }
         },
-        'form:validate:after.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.form.after($form, eventData);
+        'form:validate:after.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.form.after($form, eventData);
         },
-        'form:validate:before.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.form.before($form, eventData);
+        'form:validate:before.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.form.before($form, eventData);
         },
-        'form:validate:fail.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.form.fail($form, eventData);
+        'form:validate:fail.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.form.fail($form, eventData);
         },
-        'form:validate:pass.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.form.pass($form, eventData);
+        'form:validate:pass.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.form.pass($form, eventData);
         }
       };
       for (event in _ref) {
         binding = _ref[event];
         $form.on(event, binding);
       }
-      return $form.find(ClientSideValidations.selectors.inputs).each(function() {
-        return ClientSideValidations.enablers.input(this);
+      return $form.find(Rails4ClientSideValidations.selectors.inputs).each(function() {
+        return Rails4ClientSideValidations.enablers.input(this);
       });
     },
     input: function(input) {
@@ -209,30 +209,30 @@
       form = input.form;
       $form = $(form);
       _ref = {
-        'focusout.ClientSideValidations': function() {
-          return $(this).isValid(form.ClientSideValidations.settings.validators);
+        'focusout.Rails4ClientSideValidations': function() {
+          return $(this).isValid(form.Rails4ClientSideValidations.settings.validators);
         },
-        'change.ClientSideValidations': function() {
+        'change.Rails4ClientSideValidations': function() {
           return $(this).data('changed', true);
         },
-        'element:validate:after.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.element.after($(this), eventData);
+        'element:validate:after.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.element.after($(this), eventData);
         },
-        'element:validate:before.ClientSideValidations': function(eventData) {
-          return ClientSideValidations.callbacks.element.before($(this), eventData);
+        'element:validate:before.Rails4ClientSideValidations': function(eventData) {
+          return Rails4ClientSideValidations.callbacks.element.before($(this), eventData);
         },
-        'element:validate:fail.ClientSideValidations': function(eventData, message) {
+        'element:validate:fail.Rails4ClientSideValidations': function(eventData, message) {
           var element;
           element = $(this);
-          return ClientSideValidations.callbacks.element.fail(element, message, function() {
-            return form.ClientSideValidations.addError(element, message);
+          return Rails4ClientSideValidations.callbacks.element.fail(element, message, function() {
+            return form.Rails4ClientSideValidations.addError(element, message);
           }, eventData);
         },
-        'element:validate:pass.ClientSideValidations': function(eventData) {
+        'element:validate:pass.Rails4ClientSideValidations': function(eventData) {
           var element;
           element = $(this);
-          return ClientSideValidations.callbacks.element.pass(element, function() {
-            return form.ClientSideValidations.removeError(element);
+          return Rails4ClientSideValidations.callbacks.element.pass(element, function() {
+            return form.Rails4ClientSideValidations.removeError(element);
           }, eventData);
         }
       };
@@ -242,8 +242,8 @@
           return $(this).attr('data-validate', true);
         }).on(event, binding);
       }
-      $input.filter(':checkbox').on('change.ClientSideValidations', function() {
-        return $(this).isValid(form.ClientSideValidations.settings.validators);
+      $input.filter(':checkbox').on('change.Rails4ClientSideValidations', function() {
+        return $(this).isValid(form.Rails4ClientSideValidations.settings.validators);
       });
       return $input.filter('[id$=_confirmation]').each(function() {
         var confirmationElement, element, _ref1, _results;
@@ -251,11 +251,11 @@
         element = $form.find("#" + (this.id.match(/(.+)_confirmation/)[1]) + ":input");
         if (element[0]) {
           _ref1 = {
-            'focusout.ClientSideValidations': function() {
-              return element.data('changed', true).isValid(form.ClientSideValidations.settings.validators);
+            'focusout.Rails4ClientSideValidations': function() {
+              return element.data('changed', true).isValid(form.Rails4ClientSideValidations.settings.validators);
             },
-            'keyup.ClientSideValidations': function() {
-              return element.data('changed', true).isValid(form.ClientSideValidations.settings.validators);
+            'keyup.Rails4ClientSideValidations': function() {
+              return element.data('changed', true).isValid(form.Rails4ClientSideValidations.settings.validators);
             }
           };
           _results = [];
@@ -269,9 +269,9 @@
     }
   };
 
-  window.ClientSideValidations.validators = {
+  window.Rails4ClientSideValidations.validators = {
     all: function() {
-      return jQuery.extend({}, ClientSideValidations.validators.local, ClientSideValidations.validators.remote);
+      return jQuery.extend({}, Rails4ClientSideValidations.validators.local, Rails4ClientSideValidations.validators.remote);
     },
     local: {
       absence: function(element, options) {
@@ -317,7 +317,7 @@
       numericality: function(element, options) {
         var CHECKS, check, check_value, fn, form, operator, val;
         val = jQuery.trim(element.val());
-        if (!ClientSideValidations.patterns.numericality.test(val)) {
+        if (!Rails4ClientSideValidations.patterns.numericality.test(val)) {
           if (options.allow_blank === true && this.presence(element, {
             message: options.messages.numericality
           })) {
@@ -348,7 +348,7 @@
           } else {
             return;
           }
-          val = val.replace(new RegExp("\\" + ClientSideValidations.number_format.delimiter, 'g'), "").replace(new RegExp("\\" + ClientSideValidations.number_format.separator, 'g'), ".");
+          val = val.replace(new RegExp("\\" + Rails4ClientSideValidations.number_format.delimiter, 'g'), "").replace(new RegExp("\\" + Rails4ClientSideValidations.number_format.separator, 'g'), ".");
           fn = new Function("return " + val + " " + operator + " " + check_value);
           if (!fn()) {
             return options.messages[check];
@@ -492,7 +492,7 @@
     remote: {
       uniqueness: function(element, options) {
         var data, key, message, name, scope_value, scoped_element, scoped_name, _ref;
-        message = ClientSideValidations.validators.local.presence(element, options);
+        message = Rails4ClientSideValidations.validators.local.presence(element, options);
         if (message) {
           if (options.allow_blank === true) {
             return;
@@ -519,8 +519,8 @@
             if (scoped_element[0] && scoped_element.val() !== scope_value) {
               data.scope[key] = scoped_element.val();
               scoped_element.unbind("change." + element.id).bind("change." + element.id, function() {
-                element.trigger('change.ClientSideValidations');
-                return element.trigger('focusout.ClientSideValidations');
+                element.trigger('change.Rails4ClientSideValidations');
+                return element.trigger('focusout.Rails4ClientSideValidations');
               });
             } else {
               data.scope[key] = scope_value;
@@ -537,11 +537,11 @@
           name = options['class'] + '[' + name.split('[')[1];
         }
         data[name] = element.val();
-        if (ClientSideValidations.remote_validators_prefix == null) {
-          ClientSideValidations.remote_validators_prefix = "";
+        if (Rails4ClientSideValidations.remote_validators_prefix == null) {
+          Rails4ClientSideValidations.remote_validators_prefix = "";
         }
         if (jQuery.ajax({
-          url: "" + ClientSideValidations.remote_validators_prefix + "/validators/uniqueness",
+          url: "" + Rails4ClientSideValidations.remote_validators_prefix + "/validators/uniqueness",
           data: data,
           async: false,
           cache: false
@@ -552,17 +552,17 @@
     }
   };
 
-  window.ClientSideValidations.disableValidators = function() {
+  window.Rails4ClientSideValidations.disableValidators = function() {
     var func, validator, _ref, _results;
-    if (window.ClientSideValidations.disabled_validators === void 0) {
+    if (window.Rails4ClientSideValidations.disabled_validators === void 0) {
       return;
     }
-    _ref = window.ClientSideValidations.validators.remote;
+    _ref = window.Rails4ClientSideValidations.validators.remote;
     _results = [];
     for (validator in _ref) {
       func = _ref[validator];
-      if (window.ClientSideValidations.disabled_validators.indexOf(validator) !== -1) {
-        _results.push(delete window.ClientSideValidations.validators.remote[validator]);
+      if (window.Rails4ClientSideValidations.disabled_validators.indexOf(validator) !== -1) {
+        _results.push(delete window.Rails4ClientSideValidations.validators.remote[validator]);
       } else {
         _results.push(void 0);
       }
@@ -570,7 +570,7 @@
     return _results;
   };
 
-  window.ClientSideValidations.formBuilders = {
+  window.Rails4ClientSideValidations.formBuilders = {
     'ActionView::Helpers::FormBuilder': {
       add: function(element, settings, message) {
         var form, inputErrorField, label, labelErrorField;
@@ -608,11 +608,11 @@
     }
   };
 
-  window.ClientSideValidations.patterns = {
+  window.Rails4ClientSideValidations.patterns = {
     numericality: /^(-|\+)?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?$/
   };
 
-  window.ClientSideValidations.callbacks = {
+  window.Rails4ClientSideValidations.callbacks = {
     element: {
       after: function(element, eventData) {},
       before: function(element, eventData) {},
@@ -632,8 +632,8 @@
   };
 
   $(function() {
-    ClientSideValidations.disableValidators();
-    return $(ClientSideValidations.selectors.forms).validate();
+    Rails4ClientSideValidations.disableValidators();
+    return $(Rails4ClientSideValidations.selectors.forms).validate();
   });
 
 }).call(this);

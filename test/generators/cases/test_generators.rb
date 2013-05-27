@@ -1,17 +1,17 @@
 require 'rails/generators/test_case'
-require 'client_side_validations'
-require 'generators/client_side_validations/copy_assets_generator'
-require 'generators/client_side_validations/install_generator'
+require 'rails4_client_side_validations'
+require 'generators/rails4_client_side_validations/copy_assets_generator'
+require 'generators/rails4_client_side_validations/install_generator'
 
 class InstallGeneratorTest < Rails::Generators::TestCase
-  tests ClientSideValidations::Generators::InstallGenerator
+  tests Rails4ClientSideValidations::Generators::InstallGenerator
   destination File.expand_path('../../tmp', __FILE__)
   setup :prepare_destination
 
   test 'Assert all files are properly created when no asset pipeline present' do
     stub_configuration
     run_generator
-    assert_file 'config/initializers/client_side_validations.rb'
+    assert_file 'config/initializers/rails4_client_side_validations.rb'
     assert_file 'public/javascripts/rails.validations.js'
   end
 
@@ -21,7 +21,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     configuration.stubs(:prefix).returns('/assets')
     Rails.configuration.stubs(:assets).returns(configuration)
     run_generator
-    assert_file 'config/initializers/client_side_validations.rb'
+    assert_file 'config/initializers/rails4_client_side_validations.rb'
     assert_file 'public/javascripts/rails.validations.js'
   end
 
@@ -31,7 +31,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     configuration.stubs(:prefix).returns('/assets')
     Rails.configuration.stubs(:assets).returns(configuration)
     run_generator
-    assert_file    'config/initializers/client_side_validations.rb'
+    assert_file    'config/initializers/rails4_client_side_validations.rb'
     assert_no_file 'app/assets/javascripts/rails.validations.js'
   end
 
@@ -41,7 +41,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
 end
 
 class CopyAssetsGeneratorTest < Rails::Generators::TestCase
-  tests ClientSideValidations::Generators::CopyAssetsGenerator
+  tests Rails4ClientSideValidations::Generators::CopyAssetsGenerator
   destination File.expand_path('../../tmp', __FILE__)
   setup :prepare_destination
 

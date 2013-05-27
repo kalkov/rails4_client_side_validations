@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::AbsenceValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::AbsenceValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_absence_client_side_hash
     expected_hash = { :message => "must be blank" }

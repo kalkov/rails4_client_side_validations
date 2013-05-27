@@ -1,11 +1,11 @@
 {
-  "name": "client_side_validations",
+  "name": "rails4_client_side_validations",
   "version": "4.0.0",
   "description": "Client Side Validations",
   "main": "Gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bcardarella/client_side_validations.git"
+    "url": "git://github.com/bcardarella/rails4_client_side_validations.git"
   },
   "author": "Brian Cardarella",
   "license": "MIT",

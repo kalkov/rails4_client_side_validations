@@ -1,8 +1,8 @@
 # ClientSideValidations #
 
-[![Build Status](https://secure.travis-ci.org/bcardarella/client_side_validations.png?branch=4-0-beta)](http://travis-ci.org/bcardarella/client_side_validations)
-[![Dependency Status](https://gemnasium.com/bcardarella/client_side_validations.png?travis)](https://gemnasium.com/bcardarella/client_side_validations)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bcardarella/client_side_validations)
+[![Build Status](https://secure.travis-ci.org/bcardarella/rails4_client_side_validations.png?branch=4-0-beta)](http://travis-ci.org/bcardarella/rails4_client_side_validations)
+[![Dependency Status](https://gemnasium.com/bcardarella/rails4_client_side_validations.png?travis)](https://gemnasium.com/bcardarella/rails4_client_side_validations)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bcardarella/rails4_client_side_validations)
 
 `ClientSideValidations` made easy for your Rails v3.1+ applications!
 
@@ -29,25 +29,25 @@
 Include `ClientSideValidations` in your Gemfile
 
 ```ruby
-gem 'client_side_validations'
+gem 'rails4_client_side_validations'
 ```
 
 Then run the install generator
 
 ```
-rails g client_side_validations:install
+rails g rails4_client_side_validations:install
 ```
 
 This will install the initializer:
 
 ```
-config/initializers/client_side_validations.rb
+config/initializers/rails4_client_side_validations.rb
 ```
 
 If you want to copy the asset files from the gem into your project:
 
 ```
-rails g client_side_validations:copy_assets
+rails g rails4_client_side_validations:copy_assets
 ```
 
 ## Initializer ##
@@ -60,19 +60,19 @@ Side Validations is never going to support rendering this type of error
 rendering. If you want to maintain consistency between the client side
 rendered validation error messages and the server side rendered
 validation error messages please use what is in
-`config/initializers/client_side_validations.rb`
+`config/initializers/rails4_client_side_validations.rb`
 
 ## Plugins ##
 
 There is additional support for other `ActiveModel` based ORMs and other
-Rails `FormBuilders`. Please see the [Plugin wiki page](https://github.com/bcardarella/client_side_validations/wiki/Plugins)
+Rails `FormBuilders`. Please see the [Plugin wiki page](https://github.com/bcardarella/rails4_client_side_validations/wiki/Plugins)
 (feel free to add your own)
 
-* [SimpleForm](https://github.com/DockYard/client_side_validations-simple_form)
-* [Formtastic](https://github.com/DockYard/client_side_validations-formtastic)
-* [Mongoid](https://github.com/DockYard/client_side_validations-mongoid)
-* [MongoMapper](https://github.com/DockYard/client_side_validations-mongo_mapper)
-* [Turbolinks](https://github.com/DockYard/client_side_validations-turbolinks)
+* [SimpleForm](https://github.com/DockYard/rails4_client_side_validations-simple_form)
+* [Formtastic](https://github.com/DockYard/rails4_client_side_validations-formtastic)
+* [Mongoid](https://github.com/DockYard/rails4_client_side_validations-mongoid)
+* [MongoMapper](https://github.com/DockYard/rails4_client_side_validations-mongo_mapper)
+* [Turbolinks](https://github.com/DockYard/rails4_client_side_validations-turbolinks)
 
 ## Usage ##
 
@@ -229,7 +229,7 @@ were overwritten by the call to `FormBuilder#validate`
 
 `ClientSideValidations` will use `ActiveRecord::Base.field_error_proc` to render the error messages. Other `FormBuilders` will use their own settings.
 
-If you need to change the markup of how the errors are rendered you can modify that in `config/initializers/client_side_validations.rb`
+If you need to change the markup of how the errors are rendered you can modify that in `config/initializers/rails4_client_side_validations.rb`
 
 *Please Note* if you modify the markup, you will also need to modify `ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder']`'s `add` and `remove` functions. You can override the behavior by creating a new javascript file called `rails.validations.actionView.js` that contains the following:
 
@@ -458,11 +458,11 @@ div.field_with_errors div.ui-effects-wrapper {
 }
 ```
 
-Finally uncomment the `ActionView::Base.field_error_proc` override in `config/initializers/client_side_validations.rb`
+Finally uncomment the `ActionView::Base.field_error_proc` override in `config/initializers/rails4_client_side_validations.rb`
 
 ## Security ##
 
-By default a uniqueness middleware is added. This can be a potential security issue. If you wish this middleware can be disabled. In `config/initializers/client_side_validations.rb` just uncomment:
+By default a uniqueness middleware is added. This can be a potential security issue. If you wish this middleware can be disabled. In `config/initializers/rails4_client_side_validations.rb` just uncomment:
 
 ```ruby
 ClientSideValidations::Config.disabled_validators = [:uniqueness]
@@ -475,7 +475,7 @@ will automatically skip building validators that are disabled.
 
 [Brian Cardarella](http://twitter.com/bcardarella)
 
-[We are very thankful for the many contributors](https://github.com/bcardarella/client_side_validations/graphs/contributors)
+[We are very thankful for the many contributors](https://github.com/bcardarella/rails4_client_side_validations/graphs/contributors)
 
 ## Versioning ##
 
@@ -483,18 +483,18 @@ This gem follows [Semantic Versioning](http://semver.org)
 
 Major and minor version numbers will follow `Rails`'s major and
 minor version numbers. For example,
-`client_side_validations-3.2.0` will be compatible up to
+`rails4_client_side_validations-3.2.0` will be compatible up to
 `~> rails-3.2.0`
 
 We will maintain compatibility with one minor version back. So the 3.2.0 version of
-`client_side_validations` will be compatible with `~> rails-3.1.0`
+`rails4_client_side_validations` will be compatible with `~> rails-3.1.0`
 
 Only two versions minor versions will be actively maintained.
 
 ## Want to help? ##
 
 Please do! We are always looking to improve this gem. Please see our
-[Contribution Guidelines](https://github.com/bcardarella/client_side_validations/blob/master/CONTRIBUTING.md)
+[Contribution Guidelines](https://github.com/bcardarella/rails4_client_side_validations/blob/master/CONTRIBUTING.md)
 on how to properly submit issues and pull requests.
 
 ## Legal ##

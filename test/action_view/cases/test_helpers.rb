@@ -1,6 +1,6 @@
 require 'action_view/cases/helper'
 
-class ClientSideValidations::ActionViewHelpersTest < ActionView::TestCase
+class Rails4ClientSideValidations::ActionViewHelpersTest < ActionView::TestCase
   include ActionViewTestSetup
 
   cattr_accessor :field_error_proc
@@ -473,7 +473,7 @@ class ClientSideValidations::ActionViewHelpersTest < ActionView::TestCase
   end
 
   def test_string_as_record
-    assert_raise ClientSideValidations::ActionView::Helpers::FormHelper::Error do
+    assert_raise Rails4ClientSideValidations::ActionView::Helpers::FormHelper::Error do
       form_for('post', :validate => true) do |f|
         concat f.text_field(:cost)
       end
@@ -481,7 +481,7 @@ class ClientSideValidations::ActionViewHelpersTest < ActionView::TestCase
   end
 
   def test_symbol_as_record
-    assert_raise ClientSideValidations::ActionView::Helpers::FormHelper::Error do
+    assert_raise Rails4ClientSideValidations::ActionView::Helpers::FormHelper::Error do
       form_for(:post, :validate => true) do |f|
         concat f.text_field(:cost)
       end

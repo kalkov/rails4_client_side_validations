@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::NumericalityValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::NumericalityValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_numericality_client_side_hash
     expected_hash = { :messages => { :numericality => "is not a number" } }

@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::ExclusionValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::ExclusionValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_exclusion_client_side_hash
     expected_hash = { :message => "is reserved", :in => [1, 2] }

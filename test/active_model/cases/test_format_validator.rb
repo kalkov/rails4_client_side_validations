@@ -1,6 +1,6 @@
 require 'active_model/cases/test_base'
 
-class ActiveModel::FormatValidatorTest < ClientSideValidations::ActiveModelTestBase
+class ActiveModel::FormatValidatorTest < Rails4ClientSideValidations::ActiveModelTestBase
 
   def test_format_client_side_hash
     expected_hash = { :message => "is invalid", :with => /.+/ }

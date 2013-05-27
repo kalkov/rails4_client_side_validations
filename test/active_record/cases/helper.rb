@@ -1,6 +1,6 @@
 require 'base_helper'
 require 'active_record'
-require 'client_side_validations/active_record'
+require 'rails4_client_side_validations/active_record'
 
 # Connection must be establised before anything else
 ActiveRecord::Base.establish_connection(

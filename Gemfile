@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in client_side_validations.gemspec
-gem 'rails', github: 'rails/rails'
+# Specify your gem's dependencies in rails4_client_side_validations.gemspec
+gem 'rails', '4.0.0.rc1'
 gemspec
 
 if RUBY_VERSION >= '1.9.3'

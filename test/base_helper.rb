@@ -7,7 +7,7 @@ if RUBY_VERSION >= '1.9.3'
 end
 require 'mocha'
 require 'rails'
-require 'client_side_validations/config'
+require 'rails4_client_side_validations/config'
 
 module TestApp
   class Application < Rails::Application
@@ -19,4 +19,4 @@ module TestApp
   end
 end
 
-module ClientSideValidations; end
+module Rails4ClientSideValidations; end
