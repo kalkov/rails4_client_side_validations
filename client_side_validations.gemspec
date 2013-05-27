@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "rails4_client_side_validations"
   s.version     = Rails4ClientSideValidations::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Brian Cardarella"]
-  s.email       = ["bcardarella@gmail.com"]
+  s.authors     = ["Vassil Kalkov"]
+  s.email       = ["vassilkalkov@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{Client Side Validations}
   s.description = %q{Client Side Validations}
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files -- {lib/*,vendor/*,*.gemspec}`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_development_dependency 'rails', '~> 4.0.0'
+  s.add_development_dependency 'rails', '~> 4.0.0.rc1'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'm'
