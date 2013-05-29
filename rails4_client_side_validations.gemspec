@@ -12,8 +12,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{Client Side Validations for Rails 4}
   s.description = %q{Client Side Validations for Rails 4}
 
-  s.files         = `git ls-files -- {lib/*,vendor/*,*.gemspec}`.split("\n")
-  s.require_paths = ["lib"]
+  s.files = Dir["{lib,vendor}/**/*"] + ["README.md"]
+  s.test_files    = `git ls-files -- {test}/*`.split("\n")
+  s.require_path = 'lib'
+  s.requirements << 'none'
 
   s.add_development_dependency 'rails', '~> 4.0.0.rc1'
   s.add_development_dependency 'sqlite3'
