@@ -5,7 +5,7 @@
   $ = jQuery;
 
   $.fn.disableRails4ClientSideValidations = function() {
-    Rails4Rails4ClientSideValidations.disable(this);
+    Rails4ClientSideValidations.disable(this);
     return this;
   };
 
