@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_development_dependency 'rails', '~> 4.0.0'
+  s.add_runtime_dependency     'rails',              '>= 4.0'
+
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'm'
@@ -30,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'json'
   s.add_development_dependency 'coffee-script'
   s.add_development_dependency 'jquery-rails'
+  s.add_development_dependency 'appraisal'
 end
