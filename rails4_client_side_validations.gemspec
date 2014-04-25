@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_development_dependency 'rails', '~> 4.0.0.rc1'
+  s.add_development_dependency 'rails', '~> 4.0.0'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'm'
