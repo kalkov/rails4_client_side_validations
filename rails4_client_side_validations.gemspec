@@ -4,7 +4,7 @@ require "client_side_validations/version"
 
 Gem::Specification.new do |s|
   s.name        = "rails4_client_side_validations"
-  s.version     = Rails4ClientSideValidations::VERSION
+  s.version     = ClientSideValidations::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Vassil Kalkov"]
   s.email       = ["vassilkalkov@gmail.com"]
