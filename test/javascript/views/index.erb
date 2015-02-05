@@ -1,7 +1,8 @@
-<% @title = "rails4_client_side_validations test" %>
+<% @title = "client_side_validations test" %>
 
 <%= test_base %>
 <%= script_tag 'validateElement' %>
+<%= script_tag 'utilities' %>
 <%= test :validators, :form_builders, :callbacks %>
 <%= script_tag 'disableValidators' %>
 

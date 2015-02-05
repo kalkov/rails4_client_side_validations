@@ -1,15 +1,13 @@
-require "rubygems"
 require 'bundler'
-
 require File.join(File.expand_path('..', __FILE__), 'coffeescript/processor')
 Bundler::GemHelper.install_tasks
 
-multitask :default => 'test:ruby'
+multitask default: 'test:ruby'
 
 require 'rake/testtask'
 namespace :test do
   desc %(Run all tests)
-  multitask :all => ['test:ruby', 'test:js']
+  multitask all: ['test:ruby', 'test:js']
 
   desc %(Test Ruby code)
   Rake::TestTask.new(:ruby) do |test|
@@ -18,7 +16,7 @@ namespace :test do
   end
 
   desc %(Test Javascript code)
-  multitask :js => ['test:server', 'test:open']
+  multitask js: ['test:server', 'test:open']
 
   desc %(Starts the test server)
   task :server do
@@ -61,7 +59,7 @@ def perform_git_commit
 end
 
 def regenerate_javascript
-  Rails4ClientSideValidations::Processor.run
+  ClientSideValidations::Processor.run
   puts 'Regenerated JavaScript'
 end
 
