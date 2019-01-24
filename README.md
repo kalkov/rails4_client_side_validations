@@ -6,4 +6,4 @@
 
 Important
 ---------
-It's not recommended to use this gem. It's modified version of [client_side_validations](https://github.com/bcardarella/client_side_validations.git), which supports Rails 4. But I can't understand well the codebase, so no guarantee I'll continue to support it.
+Do not use this gem. It's modified version of [client_side_validations](https://github.com/bcardarella/client_side_validations.git), adding Rails 4 support.
